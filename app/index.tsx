@@ -1,7 +1,9 @@
+import { Link } from "expo-router";
 import * as SQLite from "expo-sqlite";
 import { useEffect, useState } from "react";
 import {
   AppRegistry,
+  Pressable,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -15,7 +17,7 @@ interface Coin {
   annee: number;
   rarete: string;
   quantite: number;
-  valeur: string;
+  valeurs: string;
   image: string;
 }
 
@@ -45,10 +47,10 @@ export default function Index() {
         );
         if (result.length > 0 && result[0].count === 0) {
           await db.runAsync(
-            "INSERT INTO coins (name, annee, rarete, quantite, valeur, image) VALUES (?, ?, ?, ?, ?, ?)",
+            "INSERT INTO coins (name, annee, rarete, quantite, valeurs, image) VALUES (?, ?, ?, ?, ?, ?)",
             [
               "5 FRANCS OR - NAPOLÉON III TÊTE NUE",
-              2021,
+              2001,
               "Rare",
               10,
               "[1.5, 2.0, 2.5]",
@@ -56,10 +58,10 @@ export default function Index() {
             ]
           );
           await db.runAsync(
-            "INSERT INTO coins (name, annee, rarete, quantite, valeur, image) VALUES (?, ?, ?, ?, ?, ?)",
+            "INSERT INTO coins (name, annee, rarete, quantite, valeurs, image) VALUES (?, ?, ?, ?, ?, ?)",
             [
               "10 FRANCS OR - NAPOLÉON III TÊTE NUE",
-              2022,
+              2001,
               "Common",
               20,
               "[1.0, 1.5]",
@@ -79,18 +81,22 @@ export default function Index() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollView}>
-        <Text>Coins:</Text>
+        {coins.length === 0 && <Text>Loading...</Text>}
         {coins.map((coin, index) => (
-          <Card key={index} style={{ width: "60%", margin: 10 }}>
-            <Card.Cover source={{ uri: coin.image }} />
-            <Card.Title title={coin.name} key={index} />
-            <Card.Content>
-              <Text>Year: {coin.annee}</Text>
-              <Text>Rarity: {coin.rarete}</Text>
-              <Text>Quantity: {coin.quantite}</Text>
-              <Text>Value: {JSON.parse(coin.valeur).pop()}€</Text>
-            </Card.Content>
-          </Card>
+          <Link href={`/coins/${coin.id}`} key={index} asChild>
+            <Pressable style={{ width: "60%", margin: 10 }}>
+              <Card key={index}>
+                <Card.Cover source={{ uri: coin.image }} />
+                <Card.Title title={coin.name} key={index} />
+                <Card.Content>
+                  <Text>Year: {coin.annee}</Text>
+                  <Text>Rarity: {coin.rarete}</Text>
+                  <Text>Quantity: {coin.quantite}</Text>
+                  <Text>Value: {JSON.parse(coin.valeurs).pop()}€</Text>
+                </Card.Content>
+              </Card>
+            </Pressable>
+          </Link>
         ))}
       </ScrollView>
     </SafeAreaView>

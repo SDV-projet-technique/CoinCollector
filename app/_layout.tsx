@@ -56,7 +56,7 @@ export default function RootLayout() {
     <PaperProvider theme={theme}>
       <SQLiteProvider databaseName="app.db">
         <Stack>
-          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="index" options={{ title: "Coins" }} />
         </Stack>
       </SQLiteProvider>
     </PaperProvider>
