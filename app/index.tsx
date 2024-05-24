@@ -81,10 +81,11 @@ export default function Index() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollView}>
-        {coins.length === 0 && <Text>Loading...</Text>}
+        {coins.length === 0 ||
+          (coins[0].valeurs == "" && <Text>Loading...</Text>)}
         {coins.map((coin, index) => (
           <Link href={`/coins/${coin.id}`} key={index} asChild>
-            <Pressable style={{ width: "60%", margin: 10 }}>
+            <Pressable style={{ width: "100%", margin: 10 }}>
               <Card key={index}>
                 <Card.Cover source={{ uri: coin.image }} />
                 <Card.Title title={coin.name} key={index} />

@@ -14,7 +14,7 @@ interface Coin {
   annee: number;
   rarete: string;
   quantite: number;
-  valeurs: string | number[];
+  valeurs: string;
   image: string;
 }
 
