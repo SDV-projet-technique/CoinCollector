@@ -1,3 +1,16 @@
+#Niveau 1
+
+- [x] Affichage d’une liste de pièces de collections avec les infos de bases (année, rareté, quantité, valeur)
+- [x] Stockage en base de données local
+
+#Niveau 2
+
+- [x] Creer un graphique pour voir l’evolution de la valeur totale de ces pièces
+
+#Niveau 3
+
+- [] Utilisation de la camera du telephone pour ajouter des photos des pièces
+
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
